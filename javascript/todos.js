@@ -15,7 +15,7 @@ $(function() {
 
 	var TodoList = Backbone.Collection.extend({
 		model: Todo,
-		localStorage: new Backbone.LocalStorage("todos-backbone"),
+		localStorage: new Backbone.LocalStorage("todos"),
 
 		done: function(){
 			return this.where({done: true});
@@ -42,7 +42,7 @@ $(function() {
 		template: _.template($('#item-template').html()),
 		events: {
 			"click .toggle"  : "toggleDone",
-			"dbclick .view"  : "edit",
+			"dblclick .view"  : "edit",
 			"click a.destroy": "clear",
 			"keypress .edit" : "updateOnEnter",
 			"blur .edit"	 : "close"
@@ -69,6 +69,7 @@ $(function() {
 		},
 
 		edit: function(){
+			alert("start editing");
 			this.$el.addClass("editing");
 			this.input.focus();
 		},
@@ -77,7 +78,7 @@ $(function() {
 			this.model.destroy();
 		},
 
-		//close the edit form
+		//close the edit form after editing
 		close: function(){
 			var value = this.input.val();
 			if(!value){
@@ -107,6 +108,7 @@ $(function() {
 		initialize: function(){
 			this.input = this.$("#new-todo");
 			this.allCheckbox = this.$("#toggle-all")[0];
+			// console.log($("#toggle-all")[0]);
 
 			this.listenTo(Todos, 'add', this.addOne);
 			this.listenTo(Todos, 'reset', this.addAll);
