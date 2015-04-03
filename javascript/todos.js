@@ -38,7 +38,9 @@ $(function() {
 	var Todos = new TodoList;
 
 	var TodoView = Backbone.View.extend({
+		//the dom element for a todo item is a list tag
 		tagName: "li",
+		//cache the template function for a single item
 		template: _.template($('#item-template').html()),
 		events: {
 			"click .toggle"  : "toggleDone",
@@ -69,7 +71,7 @@ $(function() {
 		},
 
 		edit: function(){
-			alert("start editing");
+			// alert("start editing");
 			this.$el.addClass("editing");
 			this.input.focus();
 		},
